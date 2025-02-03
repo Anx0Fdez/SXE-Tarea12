@@ -116,8 +116,6 @@ después.`
 
 ```sql
 DELETE FROM public.res_partner
-WHERE "company_id" IN (
-    SELECT "id" FROM public.res_company WHERE "name" = 'Ready Mat'
-)
+WHERE "commercial_company_name" = 'Ready Mat'
 AND "is_company" = FALSE;
 ```
