@@ -40,12 +40,60 @@ Odoo (no empresas) con la siguiente información:`
 
 
 ```sql
-select "name", "city", "commercial_company_name" 
-from public.res_partner 
-where "city" = 'Tracy';
+select "name", "city", "commercial_company_name"
+from public.res_partner
+where "city" = 'Tracy'
+order by "name";
 ```
 ![IMG4](imgs/img4.png)
 
 ## Apartado 5
+`Utilizando las tablas de odoo, obtén un listado de empresas proveedoras, que han
+emitido algún reembolso (facturas recticativas de proveedor)`
+
+- Nombre de la empresa
+- Número de factura
+- Fecha de la factura
+- Total factura SIN impuestos
+
+```sql
+SELECT 
+    res_partner."name", 
+    account_move."name", 
+    account_move."invoice_date", 
+    account_move."amount_untaxed"
+FROM public.account_move
+JOIN public.res_partner ON account_move."partner_id" = res_partner."id"
+WHERE account_move."move_type" = 'in_refund'
+AND res_partner."is_company" = TRUE
+ORDER BY account_move."invoice_date" DESC;
+``` 
+![IMG5](imgs/img5.png)
+
+## Apartado 6
+`Utilizando las tablas de odoo, obtén un listado de empresas clientes, a las que se les
+ha emitido más de dos facturas de venta (solo venta) conrmadas, mostrando los
+siguientes datos:`
+
+- Nombre de la empresa
+- Número de facturas
+- Total facturado SIN IMPUESTOS
+
+```sql
+SELECT 
+    "invoice_partner_display_name", 
+    COUNT("id"), 
+    SUM("amount_untaxed")
+FROM public.account_move
+WHERE "move_type" = 'out_invoice'
+AND "state" = 'posted'
+GROUP BY "invoice_partner_display_name"
+HAVING COUNT("id") > 2
+ORDER BY SUM("amount_untaxed") DESC;
+```
+
+![IMG6](imgs/img6.png)
+
+
 
 
