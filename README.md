@@ -31,8 +31,21 @@ ORDER BY "fechaContacto" DESC;
 ![IMG3](imgs/img3.png)
 
 ## Apartado 4
-`Utilizando las tablas de odoo, obtén un listado de empresas proveedoras, que han
-emitido algún reembolso (facturas recticativas de proveedor)`
+`Realiza una consulta que permita obtener un listado de todos los contactos de
+Odoo (no empresas) con la siguiente información:`
 
+- Nombre
+- Ciudad: Tracy
+- Nombre comercial de la empresa
+
+
+```sql
+select "name", "city", "commercial_company_name" 
+from public.res_partner 
+where "city" = 'Tracy';
+```
+![IMG4](imgs/img4.png)
+
+## Apartado 5
 
 
