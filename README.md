@@ -23,5 +23,16 @@ sentencia que cree una tabla llamada “EmpresasFCT“con los siguientes campos:
 ordenados por fechaContacto, de modo que en la primera la salga el que tenga la
 fecha más reciente.`
 
+```sql
+SELECT * FROM public."EmpresasFCT"  
+ORDER BY "fechaContacto" DESC;
+```
+
+![IMG3](imgs/img3.png)
+
+## Apartado 4
+`Utilizando las tablas de odoo, obtén un listado de empresas proveedoras, que han
+emitido algún reembolso (facturas recticativas de proveedor)`
+
 
 
