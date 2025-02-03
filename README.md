@@ -1,4 +1,5 @@
 # Tarea 12 Odoo
+##### Anxo Fernández Rodríguez
 ## Apartado 1
 `Como mencionamos en clase, aunque no es recomendable, en ocasiones puede ser
 necesario crear tablas ajenas a Odoo dentro de su base de datos (integración con
@@ -94,6 +95,29 @@ ORDER BY SUM("amount_untaxed") DESC;
 
 ![IMG6](imgs/img6.png)
 
+## Apartado 7
 
+`Crea una sentencia que actualice el correo de los contactos cuyo dominio es
+@bilbao.example.com a @bilbao.bizkaia.neus`
 
+```sql
+UPDATE public.res_partner
+SET "email" = replace("email", '@bilbao.example.com', '@bilbao.bizkaia.eus')
+WHERE "email" LIKE '%@bilbao.example.com';
+```
 
+## Apartado 8
+
+`La empresa Ready Mat ha hecho un ERE y ha despedido a todos los empleados
+que tenías como contacto. Crea una sentencia que elimine todos los contactos
+pertenecientes a la empresa “Ready Mat”, pero mantén la empresa. Añade una
+captura de pantalla de la sección de contactos de odoo con Ready Mat antes y
+después.`
+
+```sql
+DELETE FROM public.res_partner
+WHERE "company_id" IN (
+    SELECT "id" FROM public.res_company WHERE "name" = 'Ready Mat'
+)
+AND "is_company" = FALSE;
+```
